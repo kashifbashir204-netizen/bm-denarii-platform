@@ -8,4 +8,4 @@ export const ISSUER_ADDRESS = 'rUY6tjGN8PJDVyVFLztRZLmPZ8uTBUfa2Z';
 export const TRUSTLINE_URL = 'https://xpmarket.com/trustline/DFI-rUY6tjGN8PJDVyVFLztRZLmPZ8uTBUfa2Z/set';
 
 // Xaman Configuration
-export const XAMAN_API_ENDPOINT = 'https://xumm.app/api/v1/platform';
+export const XAMAN_API_ENDPOINT = '/api/xaman';

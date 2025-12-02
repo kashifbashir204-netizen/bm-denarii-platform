@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createSignInPayload, getPayloadStatus, checkDfiBalance } from './utils/xaman';
 import { TOKEN_NAME, TOKEN_CURRENCY_CODE, ISSUER_ADDRESS, TRUSTLINE_URL } from './config';
+import WalletModal from './components/WalletModal';
+import BalanceSection from './components/BalanceSection';
 
 // --- Icons (Inline SVGs for reliability) ---
 const Icons = {
@@ -1734,81 +1736,7 @@ const Footer = () => {
 // This file adds the main App component export to the combined file
 // It imports all the components from the parts and renders them in order
 
-// --- Wallet Components ---
-const WalletModal = ({ isOpen, onClose, qrUrl }) => {
-    if (!isOpen) return null;
-
-    return (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-            <div className="bg-[#1a1a2e] border border-white/10 rounded-2xl p-8 max-w-sm w-full shadow-2xl relative animate-fadeIn">
-                <button
-                    onClick={onClose}
-                    className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
-                >
-                    <Icons.X size={24} />
-                </button>
-
-                <div className="text-center">
-                    <h3 className="text-2xl font-bold text-white mb-2">Connect Xaman</h3>
-                    <p className="text-gray-400 mb-6">Scan the QR code with your Xaman App to sign in.</p>
-
-                    <div className="bg-white p-4 rounded-xl mb-6 inline-block">
-                        {qrUrl ? (
-                            <img src={qrUrl} alt="Scan with Xaman" className="w-48 h-48" />
-                        ) : (
-                            <div className="w-48 h-48 flex items-center justify-center">
-                                <Icons.Cpu className="animate-spin text-indigo-600" size={32} />
-                            </div>
-                        )}
-                    </div>
-
-                    <div className="flex items-center justify-center gap-2 text-sm text-indigo-400">
-                        <Icons.Shield size={16} />
-                        <span>Secure Connection</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-};
-
-const BalanceSection = ({ balance, account }) => {
-    if (!account) return null;
-
-    return (
-        <div className="bg-gradient-to-r from-indigo-900/50 to-purple-900/50 border-y border-white/10 backdrop-blur-md">
-            <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
-                <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 bg-indigo-500/20 rounded-full flex items-center justify-center text-indigo-400">
-                        <Icons.Wallet size={20} />
-                    </div>
-                    <div>
-                        <div className="text-xs text-gray-400 uppercase tracking-wider">Your Balance</div>
-                        <div className="text-xl font-bold text-white flex items-center gap-2">
-                            {balance} <span className="text-indigo-400">{TOKEN_NAME}</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="flex items-center gap-6">
-                    <div className="hidden md:block text-right">
-                        <div className="text-xs text-gray-400 uppercase tracking-wider">Issuer</div>
-                        <div className="text-sm font-mono text-gray-300">{ISSUER_ADDRESS.slice(0, 8)}...{ISSUER_ADDRESS.slice(-8)}</div>
-                    </div>
-                    <a
-                        href={TRUSTLINE_URL}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg text-white text-sm font-medium transition-all flex items-center gap-2 border border-white/10"
-                    >
-                        <Icons.Shield size={16} /> Set Trustline
-                    </a>
-                </div>
-            </div>
-        </div>
-    );
-};
-
+// --- Main App Component ---
 const App = () => {
     // Wallet State
     const [walletAccount, setWalletAccount] = useState(null);
