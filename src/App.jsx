@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // --- Icons (Inline SVGs for reliability) ---
 const Icons = {
@@ -40,7 +40,7 @@ const generateContent = async (prompt) => {
     const apiKey = import.meta.env.VITE_OPENAI_API_KEY || "";
 
     if (!apiKey) {
-        return "âš ï¸ OpenAI API key not configured. Please add VITE_OPENAI_API_KEY to your environment variables.";
+        return " OpenAI API key not configured. Please add VITE_OPENAI_API_KEY to your environment variables.";
     }
 
     try {
@@ -357,7 +357,7 @@ const Hero = () => {
 
 const VideoShowcase = () => {
     const videos = [
-        { id: "7abXjC6t7hA", title: "BM Denarii Intro" },
+        { id: "sZnXRJucUKQ", title: "BM Denarii Intro" },
         { id: "ofNbO4DZXPg", title: "Platform Demo" },
         { id: "3j7M4KSD6WM", title: "Builder Tutorial" },
         { id: "CI1_WrslrYI", title: "Ecosystem Overview" },
@@ -587,7 +587,7 @@ const FlagshipApp = () => {
 
                                 {!idea && !loading && (
                                     <>
-                                        <div className="text-6xl mb-4">ðŸ’¡</div>
+                                        <div className="text-6xl mb-4"></div>
                                         <h4 className="text-2xl text-white font-bold mb-2">The Idea Generator</h4>
                                         <p className="text-indigo-400 mb-6 text-center">Enter a niche (e.g., "Real Estate", "Gaming")</p>
                                         <input
@@ -602,7 +602,7 @@ const FlagshipApp = () => {
                                             disabled={!niche}
                                             className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-xl transition-all flex items-center justify-center gap-2"
                                         >
-                                            <Icons.Sparkles size={18} /> Generate Web3 Idea âœ¨
+                                            <Icons.Sparkles size={18} /> Generate Web3 Idea
                                         </button>
                                     </>
                                 )}
@@ -696,7 +696,7 @@ const AIArchitect = () => {
                                 className="bg-pink-600 hover:bg-pink-500 border-none text-white text-base py-3 px-6 flex items-center justify-center gap-2 w-full md:w-auto"
                             >
                                 {loading ? <Icons.Cpu className="animate-spin" size={20} /> : <Icons.Brain size={20} />}
-                                Design My App âœ¨
+                                Design My App
                             </Button>
                         </div>
                     </div>
@@ -756,7 +756,7 @@ const AssetAlchemist = () => {
             <div className="max-w-5xl mx-auto px-6">
                 <div className="text-center mb-12">
                     <Badge text="Token Design Engine" color="gold" />
-                    <h2 className="text-3xl md:text-5xl font-bold text-white mt-4 mb-4">The Asset Alchemist âš—ï¸</h2>
+                    <h2 className="text-3xl md:text-5xl font-bold text-white mt-4 mb-4">The Asset Alchemist </h2>
                     <p className="text-gray-400 max-w-2xl mx-auto">
                         Don't just launch a token. Engineer value. Let AI design your asset's utility and governance models.
                     </p>
@@ -811,7 +811,7 @@ const AssetAlchemist = () => {
                                 className="w-full bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-500 hover:to-orange-500 border-none text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2"
                             >
                                 {loading ? <Icons.Cpu className="animate-spin" /> : <Icons.Sparkles />}
-                                {loading ? "Transmuting..." : "Generate Gold âœ¨"}
+                                {loading ? "Transmuting..." : "Generate Gold "}
                             </Button>
                         </div>
                     </GlassCard>
@@ -874,7 +874,7 @@ const WhitepaperWeaver = () => {
             <div className="max-w-5xl mx-auto px-6">
                 <div className="text-center mb-12">
                     <Badge text="Documentation AI" color="cyan" />
-                    <h2 className="text-3xl md:text-5xl font-bold text-white mt-4 mb-4">The Whitepaper Weaver ðŸ“œ</h2>
+                    <h2 className="text-3xl md:text-5xl font-bold text-white mt-4 mb-4">The Whitepaper Weaver </h2>
                     <p className="text-gray-400 max-w-2xl mx-auto">
                         Transform your rough ideas into a structured, investor-ready whitepaper outline in seconds.
                     </p>
@@ -921,7 +921,7 @@ const WhitepaperWeaver = () => {
                                 className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 border-none text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2"
                             >
                                 {loading ? <Icons.Cpu className="animate-spin" /> : <Icons.Feather />}
-                                {loading ? "Weaving..." : "Draft Whitepaper âœ¨"}
+                                {loading ? "Weaving..." : "Draft Whitepaper "}
                             </Button>
                         </div>
                     </GlassCard>
@@ -982,7 +982,7 @@ const CodeCatalyst = () => {
             <div className="max-w-5xl mx-auto px-6">
                 <div className="text-center mb-12">
                     <Badge text="Dev Tools" color="orange" />
-                    <h2 className="text-3xl md:text-5xl font-bold text-white mt-4 mb-4">The Code Catalyst âš¡</h2>
+                    <h2 className="text-3xl md:text-5xl font-bold text-white mt-4 mb-4">The Code Catalyst </h2>
                     <p className="text-gray-400 max-w-2xl mx-auto">
                         From natural language to executable code. Generate smart contract snippets and transaction payloads instantly.
                     </p>
@@ -1018,7 +1018,7 @@ const CodeCatalyst = () => {
                                 className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 border-none text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2"
                             >
                                 {loading ? <Icons.Cpu className="animate-spin" /> : <Icons.Code />}
-                                {loading ? "Coding..." : "Generate Code ðŸ’»"}
+                                {loading ? "Coding..." : "Generate Code "}
                             </Button>
                         </div>
                     </GlassCard>
@@ -1083,7 +1083,7 @@ const RiskRadar = () => {
             <div className="max-w-5xl mx-auto px-6">
                 <div className="text-center mb-12">
                     <Badge text="Security Intelligence" color="pink" />
-                    <h2 className="text-3xl md:text-5xl font-bold text-white mt-4 mb-4">The Risk Radar ðŸ›¡ï¸</h2>
+                    <h2 className="text-3xl md:text-5xl font-bold text-white mt-4 mb-4">The Risk Radar </h2>
                     <p className="text-gray-400 max-w-2xl mx-auto">
                         Identify vulnerabilities before you launch. Get an AI-powered audit of your project's technical and economic model.
                     </p>
@@ -1107,7 +1107,7 @@ const RiskRadar = () => {
                                 className="w-full bg-gradient-to-r from-pink-600 to-red-600 hover:from-pink-500 hover:to-red-500 border-none text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2"
                             >
                                 {loading ? <Icons.Cpu className="animate-spin" /> : <Icons.AlertTriangle />}
-                                {loading ? "Scanning..." : "Scan for Risks ðŸ”"}
+                                {loading ? "Scanning..." : "Scan for Risks "}
                             </Button>
                         </div>
                     </GlassCard>
@@ -1176,7 +1176,7 @@ const GrantGuardian = () => {
             <div className="max-w-5xl mx-auto px-6">
                 <div className="text-center mb-12">
                     <Badge text="Funding Accelerator" color="emerald" />
-                    <h2 className="text-3xl md:text-5xl font-bold text-white mt-4 mb-4">The Grant Guardian ðŸ¦</h2>
+                    <h2 className="text-3xl md:text-5xl font-bold text-white mt-4 mb-4">The Grant Guardian </h2>
                     <p className="text-gray-400 max-w-2xl mx-auto">
                         Secure the bag. Generate professional grant proposals tailored to the XRPL, Algorand, and Hedera foundations.
                     </p>
@@ -1224,7 +1224,7 @@ const GrantGuardian = () => {
                                 className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 border-none text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2"
                             >
                                 {loading ? <Icons.Cpu className="animate-spin" /> : <Icons.Scroll />}
-                                {loading ? "Drafting Proposal..." : "Generate Grant ðŸ’°"}
+                                {loading ? "Drafting Proposal..." : "Generate Grant "}
                             </Button>
                         </div>
                     </GlassCard>
@@ -1431,7 +1431,7 @@ const Features = () => {
         { title: "Firebase Auth", desc: "Secure login + passwords stored in Firestore.", icon: <Icons.Shield /> },
         { title: "Multi-Chain Ready", desc: "Works natively with XRPL, Algorand, HBAR.", icon: <Icons.Globe /> },
         { title: "DFi Payment Rail", desc: "Instant payments & token-gating built in.", icon: <Icons.Coins /> },
-        { title: "Free Hosting", desc: "Deploy to Netlify in seconds â€” zero cost.", icon: <Icons.Rocket /> },
+        { title: "Free Hosting", desc: "Deploy to Netlify in seconds  zero cost.", icon: <Icons.Rocket /> },
         { title: "Xaman Connect", desc: "Built-in wallet login and signature requests.", icon: <Icons.Wallet /> },
     ];
 
@@ -1501,7 +1501,7 @@ const RetweetReward = () => {
 
                 {status === 'success' && (
                     <div className="mt-8 animate-bounce text-yellow-400 font-bold text-xl">
-                        ðŸŽ‰ +10,000 DFi added to your wallet!
+                        +10,000 DFi added to your wallet!
                     </div>
                 )}
             </div>
@@ -1528,7 +1528,7 @@ const Community = () => {
                 <div className="grid md:grid-cols-3 gap-6 mt-12">
                     <GlassCard className="text-left bg-blue-900/10 border-blue-500/20">
                         <div className="flex items-center justify-between mb-4">
-                            <span className="text-blue-400 font-bold text-sm">TODAY â€¢ 2:00 PM UTC</span>
+                            <span className="text-blue-400 font-bold text-sm">TODAY  2:00 PM UTC</span>
                             <Icons.Twitter className="text-blue-400" />
                         </div>
                         <h4 className="text-xl font-bold text-white mb-2">Building a DEX UI</h4>
@@ -1572,7 +1572,7 @@ const CTA = () => {
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">For Free. Today.</span>
                 </h2>
                 <p className="text-lg md:text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
-                    No cost. No barriers. No experience needed. Just your imagination â€” and BM Denarii does the rest.
+                    No cost. No barriers. No experience needed. Just your imagination  and BM Denarii does the rest.
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -1588,7 +1588,7 @@ const CTA = () => {
                 </div>
 
                 <p className="mt-8 text-sm text-gray-600">
-                    Powered by Google AI â€¢ XRPL â€¢ Algorand â€¢ Hedera
+                    Powered by Google AI  XRPL  Algorand  Hedera
                 </p>
             </div>
         </section>
