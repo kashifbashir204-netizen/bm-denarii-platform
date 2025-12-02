@@ -36,8 +36,7 @@ const Icons = {
     Feather: (props) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z" /><line x1="16" x2="2" y1="8" y2="22" /><line x1="17.5" x2="9" y1="15" y2="15" /></svg>,
     AlertTriangle: (props) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" /><line x1="12" x2="12" y1="9" y2="13" /><line x1="12" x2="12.01" y1="17" y2="17" /></svg>,
     Braces: (props) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1" /><path d="M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1" /></svg>,
-    Scroll: (props) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M8 21h12a2 2 0 0 0 2-2v-2H10v2a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v3h4" /><path d="M19 17V5a2 2 0 0 0-2-2H4" /></svg>,
-    Mic: (props) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><line x1="12" x2="12" y1="19" y2="23" /><line x1="8" x2="16" y1="23" y2="23" /></svg>
+    Scroll: (props) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M8 21h12a2 2 0 0 0 2-2v-2H10v2a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v3h4" /><path d="M19 17V5a2 2 0 0 0-2-2H4" /></svg>
 };
 
 // --- API Helper (OpenAI) ---
@@ -358,12 +357,6 @@ const Hero = () => {
                         </a>
                         <a href="#examples">
                             <Button>Build Examples</Button>
-                        </a>
-                        <a href="https://x.com/bmsquantum" target="_blank" rel="noopener noreferrer">
-                            <Button className="flex items-center gap-2">
-                                <Icons.Mic size={18} />
-                                Join Daily Space
-                            </Button>
                         </a>
                     </div>
                     <div className="mt-12 flex flex-wrap items-center justify-center md:justify-start gap-4 md:gap-6 text-gray-400 text-sm md:text-base font-medium">
@@ -1626,7 +1619,7 @@ const CTA = () => {
                     </a>
                     <a href="https://x.com/bmsquantum" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
                         <Button className="w-full flex items-center justify-center gap-2">
-                            <Icons.Mic size={20} />
+                            <Icons.Twitter size={20} />
                             Join Daily Space
                         </Button>
                     </a>
@@ -1635,45 +1628,6 @@ const CTA = () => {
                 <p className="mt-8 text-sm text-gray-600">
                     Powered by Google AI  XRPL  Algorand  Hedera
                 </p>
-            </div>
-        </section>
-    );
-};
-
-const SignUpForm = () => {
-    return (
-        <section className="py-20 bg-[#0a0a1c] relative overflow-hidden">
-            <div className="absolute inset-0 bg-indigo-600/5 blur-3xl pointer-events-none"></div>
-            <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
-                <Badge text="Join the Community" color="purple" />
-                <h2 className="text-3xl md:text-5xl font-bold text-white mt-6 mb-4">Sign Up Free</h2>
-                <p className="text-gray-400 mb-10 max-w-xl mx-auto">
-                    Get early access to new tools, exclusive airdrops, and builder resources.
-                </p>
-
-                <form
-                    action="https://formspree.io/f/xjknrwzj"
-                    method="POST"
-                    className="max-w-md mx-auto bg-white/5 backdrop-blur-xl border border-white/10 p-2 rounded-2xl flex flex-col sm:flex-row gap-2"
-                >
-                    {/* Spam Protection (Honeypot) */}
-                    <input type="text" name="_gotcha" style={{ display: 'none' }} />
-
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder="Enter your email"
-                        required
-                        className="flex-1 bg-transparent border-none outline-none text-white placeholder-gray-500 px-4 py-3"
-                    />
-                    <button
-                        type="submit"
-                        className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-lg shadow-indigo-500/20 whitespace-nowrap"
-                    >
-                        Sign Up
-                    </button>
-                </form>
-                <p className="mt-4 text-xs text-gray-500">No spam. Unsubscribe anytime.</p>
             </div>
         </section>
     );
@@ -1880,7 +1834,6 @@ const App = () => {
             <RetweetReward />
             <Community />
             <CTA />
-            <SignUpForm />
             <Footer />
         </div>
     );
