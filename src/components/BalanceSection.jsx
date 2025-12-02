@@ -48,16 +48,16 @@ const BalanceSection = ({ balance, account }) => {
 
                         {/* Center: Balance Display */}
                         <div className="flex-1 w-full lg:w-auto flex justify-center">
-                            <div className="bg-white/5 border border-white/10 rounded-2xl px-8 py-4 flex items-center gap-6 min-w-[300px] justify-between group hover:bg-white/10 transition-all duration-300">
-                                <div>
+                            <div className="bg-white/5 border border-white/10 rounded-2xl px-6 py-4 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 w-full sm:w-auto min-w-0 sm:min-w-[300px] justify-between group hover:bg-white/10 transition-all duration-300">
+                                <div className="text-center sm:text-left w-full sm:w-auto overflow-hidden">
                                     <div className="text-xs text-gray-400 uppercase tracking-wider mb-1">Total Balance</div>
-                                    <div className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-indigo-200 to-indigo-400 font-sans">
+                                    <div className="text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-indigo-200 to-indigo-400 font-sans truncate">
                                         {balance}
                                     </div>
                                 </div>
-                                <div className="text-right">
+                                <div className="flex flex-row sm:flex-col items-center sm:items-end gap-3 sm:gap-0 w-full sm:w-auto justify-center sm:justify-end border-t border-white/5 sm:border-0 pt-3 sm:pt-0 mt-1 sm:mt-0">
                                     <div className="text-xl font-bold text-indigo-400">{TOKEN_NAME}</div>
-                                    <div className="flex items-center gap-1 text-xs text-green-400 bg-green-400/10 px-2 py-0.5 rounded-full">
+                                    <div className="flex items-center gap-1 text-xs text-green-400 bg-green-400/10 px-2 py-0.5 rounded-full sm:mt-1">
                                         <Icons.TrendingUp size={10} />
                                         <span>Live</span>
                                     </div>
