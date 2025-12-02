@@ -319,34 +319,14 @@ const Navbar = ({ walletAccount, onConnect, onDisconnect }) => {
                         )}
                     </div>
 
-                    <div className="mt-6 pt-6 border-t border-white/10">
-                        {walletAccount ? (
-                            <button
-                                onClick={() => { onDisconnect(); setIsOpen(false); }}
-                                className="w-full bg-red-500/10 hover:bg-red-500/20 py-3 rounded-xl text-red-400 border border-red-500/20 flex items-center justify-center gap-2"
-                            >
-                                <Icons.X size={18} /> Disconnect Wallet
-                            </button>
-                        ) : (
-                            <button
-                                onClick={() => { onConnect(); setIsOpen(false); }}
-                                className="w-full bg-indigo-600 hover:bg-indigo-500 py-3 rounded-xl text-white font-bold shadow-lg flex items-center justify-center gap-2"
-                            >
-                                <Icons.Wallet size={18} /> Connect Wallet
-                            </button>
-                        )}
-                    </div>
+
 
                     <div className="text-xs font-bold text-gray-500 uppercase mt-4 mb-2">Resources</div>
                     <a href="#xrpl-guide" className="text-lg text-gray-300 hover:text-white pl-4 border-l-2 border-white/10" onClick={() => setIsOpen(false)}>Dev Guide</a>
                     <a href="#examples" className="text-lg text-gray-300 hover:text-white pl-4 border-l-2 border-white/10" onClick={() => setIsOpen(false)}>Build Examples</a>
                     <a href="#training" className="text-lg text-gray-300 hover:text-white pl-4 border-l-2 border-white/10" onClick={() => setIsOpen(false)}>Training</a>
 
-                    <div className="mt-6">
-                        <button className="w-full bg-indigo-600 py-3 rounded-full text-white font-bold">
-                            Connect Wallet
-                        </button>
-                    </div>
+
                 </div>
             )}
         </nav>
@@ -1818,10 +1798,12 @@ const App = () => {
                 onConnect={handleConnectWallet}
                 onDisconnect={handleDisconnect}
             />
-            <BalanceSection
-                balance={dfiBalance}
-                account={walletAccount}
-            />
+            <div className="pt-20 relative z-40">
+                <BalanceSection
+                    balance={dfiBalance}
+                    account={walletAccount}
+                />
+            </div>
             <Hero />
             <VideoShowcase />
             <MissionBanner />
