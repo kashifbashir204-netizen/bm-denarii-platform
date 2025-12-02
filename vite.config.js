@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   build: {
-    target: 'es2015',
+    target: 'es2020',
     minify: 'esbuild',
     chunkSizeWarningLimit: 1000,
     rollupOptions: {
