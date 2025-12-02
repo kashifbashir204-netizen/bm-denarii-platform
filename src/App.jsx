@@ -1729,9 +1729,20 @@ const App = () => {
     // Handle Wallet Connection
     const handleConnectWallet = async () => {
         try {
-            setShowQrModal(true);
             const payload = await createSignInPayload();
-            setQrUrl(payload.refs.qr_png);
+
+            // Check if mobile
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+            if (isMobile && payload.next && payload.next.always) {
+                // Redirect to Xaman app directly
+                window.location.href = payload.next.always;
+            } else {
+                // Show QR Code on Desktop
+                setQrUrl(payload.refs.qr_png);
+                setShowQrModal(true);
+            }
+
             setPayloadUuid(payload.uuid);
 
             // Subscribe to status updates via WebSocket
