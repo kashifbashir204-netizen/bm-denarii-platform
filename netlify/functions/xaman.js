@@ -1,33 +1,37 @@
 
-const fetch = require('node-fetch'); // Netlify Functions (Node 18) usually support global fetch, but require might be safer or just use global fetch if Node 18+
-
-exports.handler = async (event, context) => {
+export default async (req, context) => {
     const headers = {
         'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Headers': 'Content-Type, X-API-Key, X-API-Secret',
         'Access-Control-Allow-Methods': 'GET, POST, OPTIONS'
     };
 
-    if (event.httpMethod === 'OPTIONS') {
-        return { statusCode: 200, headers, body: 'OK' };
+    if (req.method === 'OPTIONS') {
+        return new Response("OK", { status: 200, headers });
     }
 
     const apiKey = process.env.VITE_XAMAN_API_KEY || process.env.XAMAN_API_KEY;
     const apiSecret = process.env.VITE_XAMAN_API_SECRET || process.env.XAMAN_API_SECRET;
 
     if (!apiKey || !apiSecret) {
-        return {
-            statusCode: 500,
-            headers,
-            body: JSON.stringify({ error: "Server Xaman API Credentials not configured" })
-        };
+        return new Response(JSON.stringify({ error: "Server Xaman API Credentials not configured" }), {
+            status: 500,
+            headers: { ...headers, 'Content-Type': 'application/json' }
+        });
     }
 
     try {
-        const path = event.path.replace(/\/\.netlify\/functions\/xaman\/?/, ''); // clean path
-        const method = event.httpMethod;
+        // Parse URL to get endpoint
+        const url = new URL(req.url);
+        // Path will be like /.netlify/functions/xaman/payload -> we want 'payload'
+        // or /.netlify/functions/xaman -> maybe base?
+        // Let's assume the redirect maps /api/xaman/* -> /.netlify/functions/xaman/*
 
-        // Helper to forward request to Xaman
+        // Easier: Just look at the last parts of the path or query params.
+        // But wait, my frontend sends query param ?uuid=... for GET.
+        // And POST is payload.
+
+        // Helper to forward
         const callXaman = async (endpoint, options = {}) => {
             const response = await fetch(`https://xumm.app/api/v1/platform/${endpoint}`, {
                 ...options,
@@ -46,43 +50,39 @@ exports.handler = async (event, context) => {
             return await response.json();
         };
 
-        // 1. Create Payload (POST /)
-        if (method === 'POST') {
-            const body = JSON.parse(event.body);
-            // Safety Check: Ensure we only allow specific transaction types if needed, 
-            // but for now we'll pass through the payload creation to allow flexibility.
+        if (req.method === 'POST') {
+            const body = await req.json();
             const result = await callXaman('payload', {
                 method: 'POST',
                 body: JSON.stringify(body)
             });
-            return { statusCode: 200, headers, body: JSON.stringify(result) };
+            return new Response(JSON.stringify(result), {
+                status: 200,
+                headers: { ...headers, 'Content-Type': 'application/json' }
+            });
         }
 
-        // 2. Get Payload Status (GET /payload/{uuid})
-        // Path handling might be tricky with query params vs slashes. 
-        // Let's assume the client sends the UUID in the query string or body for simplicity,
-        // OR parses the path.
-        // Let's simplify: client sends `?uuid=...` for GET
-        if (method === 'GET') {
-            const { uuid } = event.queryStringParameters;
+        if (req.method === 'GET') {
+            const uuid = url.searchParams.get('uuid');
             if (uuid) {
                 const result = await callXaman(`payload/${uuid}`, { method: 'GET' });
-                return { statusCode: 200, headers, body: JSON.stringify(result) };
+                return new Response(JSON.stringify(result), {
+                    status: 200,
+                    headers: { ...headers, 'Content-Type': 'application/json' }
+                });
             }
         }
 
-        return {
-            statusCode: 400,
-            headers,
-            body: JSON.stringify({ error: "Invalid Request" })
-        };
+        return new Response(JSON.stringify({ error: "Invalid Request" }), {
+            status: 400,
+            headers: { ...headers, 'Content-Type': 'application/json' }
+        });
 
     } catch (error) {
         console.error("Xaman Function Error:", error);
-        return {
-            statusCode: 500,
-            headers,
-            body: JSON.stringify({ error: error.message })
-        };
+        return new Response(JSON.stringify({ error: error.message }), {
+            status: 500,
+            headers: { ...headers, 'Content-Type': 'application/json' }
+        });
     }
 };
