@@ -1,35 +1,27 @@
-import { XAMAN_API_ENDPOINT, TOKEN_CURRENCY_CODE, ISSUER_ADDRESS } from '../config';
+import { TOKEN_CURRENCY_CODE, ISSUER_ADDRESS } from '../config';
 import { Client } from 'xrpl';
 
-const apiKey = import.meta.env.VITE_XAMAN_API_KEY;
-const apiSecret = import.meta.env.VITE_XAMAN_API_SECRET;
+const getBaseUrl = () => {
+    // In development, we might ideally need to point to localhost:8888 if using netlify dev, 
+    // but relative path '/.netlify/functions/xaman' works well if served correctly or deployed.
+    return '/.netlify/functions/xaman';
+};
 
 export const createSignInPayload = async () => {
-    if (!apiKey || !apiSecret) {
-        throw new Error("Xaman API Credentials missing");
-    }
-
+    // No secrets needed here!
     try {
-        const response = await fetch(`${XAMAN_API_ENDPOINT}/payload`, {
+        const response = await fetch(getBaseUrl(), {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-API-Key': apiKey,
-                'X-API-Secret': apiSecret
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                txjson: {
-                    TransactionType: 'SignIn'
-                },
-                options: {
-                    submit: true,
-                    expire: 5 // 5 minutes
-                }
+                txjson: { TransactionType: 'SignIn' },
+                options: { submit: true, expire: 5 }
             })
         });
 
         if (!response.ok) {
-            throw new Error(`Xaman API Error: ${response.statusText}`);
+            const err = await response.json();
+            throw new Error(err.error || `Server Error: ${response.statusText}`);
         }
 
         return await response.json();
@@ -41,17 +33,14 @@ export const createSignInPayload = async () => {
 
 export const getPayloadStatus = async (uuid) => {
     try {
-        const response = await fetch(`${XAMAN_API_ENDPOINT}/payload/${uuid}`, {
+        const response = await fetch(`${getBaseUrl()}?uuid=${uuid}`, {
             method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-API-Key': apiKey,
-                'X-API-Secret': apiSecret
-            }
+            headers: { 'Content-Type': 'application/json' }
         });
 
         if (!response.ok) {
-            throw new Error(`Xaman API Error: ${response.statusText}`);
+            const err = await response.json();
+            throw new Error(err.error || `Server Error: ${response.statusText}`);
         }
 
         return await response.json();

@@ -45,37 +45,29 @@ const Icons = {
 
 // --- API Helper (OpenAI) ---
 const generateContent = async (prompt) => {
-    const apiKey = import.meta.env.VITE_OPENAI_API_KEY || "";
-
-    if (!apiKey) {
-        return " OpenAI API key not configured. Please add VITE_OPENAI_API_KEY to your environment variables.";
-    }
-
+    // Call our own proxy - API Key is handled on the server (Netlify Function)
     try {
-        const response = await fetch('https://api.openai.com/v1/chat/completions', {
+        const response = await fetch('/api/ai', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${apiKey}`
             },
             body: JSON.stringify({
                 model: 'gpt-3.5-turbo',
-                messages: [{ role: 'user', content: prompt }],
-                max_tokens: 500,
-                temperature: 0.7
+                messages: [{ role: 'user', content: prompt }]
             })
         });
 
         if (!response.ok) {
             const error = await response.json();
-            throw new Error(error.error?.message || "OpenAI API Error");
+            throw new Error(error.error?.message || "AI Service Error");
         }
 
         const data = await response.json();
         return data.choices?.[0]?.message?.content || "AI is contemplating the blockchain. Try again!";
     } catch (error) {
         console.error("AI Error:", error);
-        return `Error: ${error.message}. Please check your API key and try again.`;
+        return `Error: ${error.message}. Please try again later.`;
     }
 };
 
