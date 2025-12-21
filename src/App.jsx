@@ -47,7 +47,7 @@ const Icons = {
 const generateContent = async (prompt) => {
     // Call our own proxy - API Key is handled on the server (Netlify Function)
     try {
-        const response = await fetch('/api/ai', {
+        const response = await fetch('/.netlify/functions/ai', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

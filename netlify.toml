@@ -5,17 +5,7 @@
 
 # Specific redirects MUST come before the catch-all
 
-[[redirects]]
-  from = "/api/ai"
-  to = "/.netlify/functions/ai"
-  status = 200
-  force = true
 
-[[redirects]]
-  from = "/api/xaman/*"
-  to = "/.netlify/functions/xaman/:splat"
-  status = 200
-  force = true
 
 [[redirects]]
   from = "/*"
