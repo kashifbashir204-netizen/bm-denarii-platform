@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const ARTICLES = [
   {
@@ -278,6 +278,38 @@ export default function KnowledgeBase() {
   const [activeTab, setActiveTab] = useState('reader'); // reader | markdown
 
   const activeArticle = ARTICLES.find(a => a.id === selectedId) || ARTICLES[0];
+
+  useEffect(() => {
+    if (!activeArticle) return;
+    document.title = `${activeArticle.title} | BM Denarii Platform`;
+    
+    // Dynamically update meta description
+    let descMeta = document.querySelector('meta[name="description"]');
+    if (!descMeta) {
+      descMeta = document.createElement('meta');
+      descMeta.setAttribute('name', 'description');
+      document.head.appendChild(descMeta);
+    }
+    descMeta.setAttribute('content', activeArticle.summary);
+
+    // Dynamically update open graph title
+    let ogTitle = document.querySelector('meta[property="og:title"]');
+    if (!ogTitle) {
+      ogTitle = document.createElement('meta');
+      ogTitle.setAttribute('property', 'og:title');
+      document.head.appendChild(ogTitle);
+    }
+    ogTitle.setAttribute('content', activeArticle.title);
+
+    // Dynamically update open graph description
+    let ogDesc = document.querySelector('meta[property="og:description"]');
+    if (!ogDesc) {
+      ogDesc = document.createElement('meta');
+      ogDesc.setAttribute('property', 'og:description');
+      document.head.appendChild(ogDesc);
+    }
+    ogDesc.setAttribute('content', activeArticle.summary);
+  }, [selectedId]);
 
   const handleCopy = (id, text) => {
     navigator.clipboard.writeText(text);
