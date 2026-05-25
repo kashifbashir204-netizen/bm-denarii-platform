@@ -3,6 +3,7 @@ import { createSignInPayload, getPayloadStatus, checkDfiBalance } from './utils/
 import { TOKEN_NAME, TOKEN_CURRENCY_CODE, ISSUER_ADDRESS, TRUSTLINE_URL } from './config';
 import WalletModal from './components/WalletModal';
 import BalanceSection from './components/BalanceSection';
+import KnowledgeBase from './components/KnowledgeBase';
 
 // --- Icons (Inline SVGs for reliability) ---
 const Icons = {
@@ -254,6 +255,7 @@ const Navbar = ({ walletAccount, onConnect, onDisconnect }) => {
                     <a href="#risk-radar" className="hover:text-white transition-colors text-red-400 font-bold">Risk Radar</a>
                     <a href="#grant-guardian" className="hover:text-white transition-colors text-emerald-400 font-bold">Grant Guardian</a>
                     <a href="#xrpl-guide" className="hover:text-white transition-colors flex items-center gap-1"><Icons.Code size={16} /> Guide</a>
+                    <a href="#knowledge-base" className="hover:text-white transition-colors text-indigo-400 font-bold">Articles</a>
                     {walletAccount ? (
                         <div className="flex items-center gap-4">
                             <div className="text-right hidden xl:block">
@@ -319,6 +321,7 @@ const Navbar = ({ walletAccount, onConnect, onDisconnect }) => {
 
                     <div className="text-xs font-bold text-gray-500 uppercase mt-4 mb-2">Resources</div>
                     <a href="#xrpl-guide" className="text-lg text-gray-300 hover:text-white pl-4 border-l-2 border-white/10" onClick={() => setIsOpen(false)}>Dev Guide</a>
+                    <a href="#knowledge-base" className="text-lg text-indigo-400 font-bold hover:text-indigo-300 pl-4 border-l-2 border-indigo-500/30" onClick={() => setIsOpen(false)}>Articles</a>
                     <a href="#examples" className="text-lg text-gray-300 hover:text-white pl-4 border-l-2 border-white/10" onClick={() => setIsOpen(false)}>Build Examples</a>
                     <a href="#training" className="text-lg text-gray-300 hover:text-white pl-4 border-l-2 border-white/10" onClick={() => setIsOpen(false)}>Training</a>
 
@@ -1871,6 +1874,7 @@ const App = () => {
             <XRPLGuide />
             <BuildExamples />
             <Training />
+            <KnowledgeBase />
             <Features />
             <RetweetReward />
             <Community />
